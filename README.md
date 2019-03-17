@@ -74,6 +74,48 @@ Setting up the `params` array:
 
 You can get the shopping cart component anywhere in the app using `Yii::$app->cart`.
 
+## Configure Multiple carts:
+Update Web.php in your config folder.
+See example :
+```
+'cart' => [
+            'class' => 'devanych\cart\Cart',
+            'storageClass' => 'devanych\cart\storage\SessionStorage',
+            'calculatorClass' => 'devanych\cart\calculators\SimpleCalculator',
+            'params' => [
+                'key' => 'cart',
+                'expire' => 604800,
+                'productClass' => 'app\models\Food',
+                'productFieldId' => 'code',
+                'productFieldPrice' => 'price',
+            ],
+        ],'itemcart' => [
+            'class' => 'devanych\cart\Cart',
+            'storageClass' => 'devanych\cart\storage\SessionStorage',
+            'calculatorClass' => 'devanych\cart\calculators\SimpleCalculator',
+            'params' => [
+                'key' => 'itemcart',
+                'expire' => 604800,
+                'productClass' => 'app\models\Item',
+                'productFieldId' => 'id',
+                'productFieldPrice' => 'rate',
+            ],
+        ],'salecart' => [
+            'class' => 'devanych\cart\Cart',
+            'storageClass' => 'devanych\cart\storage\SessionStorage',
+            'calculatorClass' => 'devanych\cart\calculators\SimpleCalculator',
+            'params' => [
+                'key' => 'salecart',
+                'expire' => 604800,
+                'productClass' => 'app\models\Item',
+                'productFieldId' => 'id',
+                'productFieldPrice' => 'price',
+            ],
+        ]
+
+
+
+```
 Using cart:
 
 ```php
@@ -155,4 +197,3 @@ echo $product->name;
 
 ## Useful links
 
-Article with a detailed description in Russian language: <https://zyubin.ru/frameworks/yii/rasshirenie-korzina-dlya-yii2.html>
